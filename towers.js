@@ -2,27 +2,27 @@
 
 const Towers = function (name, pegs, discs) {
   this.name = name;
+  this.discs = discs;
+  this.pegs = pegs;
   this.moveCount = 0;
-
-  let initializeBoard = () => {
+  this.initializeBoard = () => {
     let towers = [];
 
-    for (let i = 0; i < pegs; i++) {
+    for (let i = 0; i < this.pegs; i++) {
       towers.push([]);
     }
 
-    for (let j = discs; j > 0; j--) {
+    for (let j = this.discs; j > 0; j--) {
       towers[0].push(j);
     }
 
     return towers;
   };
-
-  this.towers = initializeBoard();
-
+  this.towers = this.initializeBoard();
   this.printBoard = function () {
     this.towers.map((tower) => console.log("---", ...tower));
   };
+  this.shouldAutoPlay = true; // we need a condition for the autoPlay method to break the loop if the game has been won. This property's value will change to false if the game is won.
 };
 
 Towers.prototype.moveDisc = function (from, to) {
@@ -45,7 +45,7 @@ Towers.prototype.moveDisc = function (from, to) {
       "You cannont move a larger disc on top of a smaller one, the board is still:";
   }
 
-  if (possible === true) {
+  if (possible) {
     this.towers[to - 1].push(
       this.towers[from - 1][this.towers[from - 1].length - 1]
     );
@@ -53,40 +53,48 @@ Towers.prototype.moveDisc = function (from, to) {
     returnStatement = `That move was successful, ${this.name} Towers board is now:`;
   }
 
-  if (to !== 1 && this.towers[to - 1].length === 5) {
+  if (to !== 1 && this.towers[to - 1].length === this.discs) {
     returnStatement = `YOU WIN! The ${this.name} Towers board has been reset to it's original position. Play again?`;
-    this.towers[0].push(5, 4, 3, 2, 1);
-    this.towers[to - 1].splice(0, 5);
+    // for (let j = this.discs; j > 0; j--) {
+    //   this.towers[0].push(j);
+    // }
+    // this.towers[to - 1].splice(0, this.discs);
+    this.towers = this.initializeBoard();
     this.printBoard();
+    this.shouldAutoPlay = false; // this will update the object's property to be used as a condition in the autoPlay loop
   }
 
   console.log(returnStatement);
   this.printBoard();
+  return true;
 };
 
 Towers.prototype.autoPlay = function (numMoves) {
   let moveCount = 0;
 
   let randomMove = () => {
-    let moveFrom = Math.ceil(Math.random() * this.towers.length);
+    let moveFrom = Math.ceil(Math.random() * this.towers.length); //
     let moveTo = Math.ceil(Math.random() * this.towers.length); // finish randomizing the move choices to be flexible with how many towers there are
 
-    this.moveDisc(moveFrom, moveTo);
+    play = this.moveDisc(moveFrom, moveTo);
 
     return moveCount;
   };
+
   for (let i = 0; i < numMoves; i++) {
     randomMove();
     this.moveCount++;
+    if (!this.shouldAutoPlay) {
+      break;
+    }
+    // need to get a condition from .moveDisc
   }
 };
 
 const hanoi = new Towers("Hanoi", 3, 5);
 const brooklyn = new Towers("Brooklyn", 8, 6);
-const washingtonDC = new Towers("Washington, D.C.");
+const washingtonDC = new Towers("Washington, D.C.", 6, 8);
 
-// console.log(hanoi);
-// console.log(brooklyn);
-
-// hanoi.moveDisc(1, 2);
-// brooklyn.moveDisc(1, 6);
+console.log(hanoi);
+console.log(brooklyn);
+console.log(washingtonDC);
