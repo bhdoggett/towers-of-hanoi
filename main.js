@@ -76,7 +76,6 @@ Towers.prototype.autoPlay = function (numMoves) {
     if (!this.shouldAutoPlay) {
       break;
     }
-    // need to get a condition from .moveDisc
   }
 };
 
