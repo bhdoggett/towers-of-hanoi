@@ -4,7 +4,8 @@ This project has been created by a student at Parsity, an online software engine
 
 If you have any questions about this project or the program in general, visit [parsity.io](https://parsity.io/) or email hello@parsity.io.
 
---
+---
+
 This version of the Towers of Hanoi enables the player to initialize and name different boards with different numbers of pegs and discs. To do this, declare a variable with this syntax:
 
 const boardName = new Towers('Board Name', pegs, discs).
