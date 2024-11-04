@@ -87,7 +87,9 @@ Towers.prototype.autoPlay = function (numMoves) {
 const hanoi = new Towers("Hanoi", 3, 5);
 const brooklyn = new Towers("Brooklyn", 5, 7);
 const washingtonDC = new Towers("Washington, D.C.", 7, 9);
+const parsity = new Towers("Parsity", 4, 6);
 
 console.log(hanoi);
 console.log(brooklyn);
 console.log(washingtonDC);
+console.log(parsity);
