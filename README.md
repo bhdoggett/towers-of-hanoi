@@ -11,12 +11,13 @@ const boardName = new Towers('Board Name', pegs, discs).
 
 This new game object will contain a few methods:
 
-.name stores the name of the board given in the initial argument
-.pegs stores the number of pegs given in the initial argment
-.discs stores the number of discs given in the initial argument
-.moveCount starts at 0 when the board is initialized and increments by one with every move
-.printboard = will print the current state of the board
+.name stores the name of the board given in the initial argument  
+.pegs stores the number of pegs given in the initial argment  
+.discs stores the number of discs given in the initial argument  
+.moveCount starts at 0 when the board is initialized and increments by one with every move  
+.printboard = will print the current state of the board  
 .shouldAutoPlay starts with the boolean value of true and changes to false if the game is won to stop the .autoPlay prototype function
 
-.moveDisc(from, to) is a prototype function which enables the game to be played incrementally by moving discs from one peg to another
-.autoPlay(numMoves) is a prototype function which enables a certain number of random moves to be made until the number of moves is reached or the game is won, stopping the autoPlay function.
+In addition, there are two prototype methods:  
+.moveDisc(from, to) is a prototype function which enables the game to be played incrementally by moving discs from one peg to another  
+.autoPlay(numMoves) is a prototype function which enables a certain number of random moves to be made until the number of moves is reached or the game is won, stopping the autoPlay function's loop.
