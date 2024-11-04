@@ -25,12 +25,18 @@ const Towers = function (name, pegs, discs) {
 
 Towers.prototype.moveDisc = function (from, to) {
   let possible = true;
-  let returnStatement = "";
+  let message = {
+    error1:
+      "There are no discs currently on the tower you chose to move from. The board is still:",
+    error2:
+      "You cannont move a larger disc on top of a smaller one, the board is still:",
+    successfulMove: `That move was successful, ${this.name} Towers board is now:`,
+    win: `YOU WIN! The ${this.name} Towers board has been reset to it's original position. Play again?`,
+  };
 
   if (!this.towers[from - 1][this.towers[from - 1].length - 1]) {
     possible = false;
-    returnStatement =
-      "There are no discs currently on the tower you chose to move from. The board is still:";
+    console.log(message.error1);
   }
 
   if (
@@ -38,8 +44,7 @@ Towers.prototype.moveDisc = function (from, to) {
     this.towers[to - 1][this.towers[to - 1].length - 1]
   ) {
     possible = false;
-    returnStatement =
-      "You cannont move a larger disc on top of a smaller one, the board is still:";
+    console.log(message.error2);
   }
 
   if (possible) {
@@ -47,18 +52,18 @@ Towers.prototype.moveDisc = function (from, to) {
       this.towers[from - 1][this.towers[from - 1].length - 1]
     );
     this.towers[from - 1].splice(this.towers[from - 1].length - 1, 1);
-    returnStatement = `That move was successful, ${this.name} Towers board is now:`;
-  }
 
-  if (to !== 1 && this.towers[to - 1].length === this.discs) {
-    returnStatement = `YOU WIN! The ${this.name} Towers board has been reset to it's original position. Play again?`;
+    if (to !== 1 && this.towers[to - 1].length === this.discs) {
+      console.log(message.win);
 
-    this.towers = this.initializeBoard();
-    this.shouldAutoPlay = false;
+      this.towers = this.initializeBoard();
+      this.shouldAutoPlay = false;
+    } else {
+      console.log(message.successfulMove);
+    }
   }
 
   this.moveCount++;
-  console.log(returnStatement);
   this.printBoard();
 };
 
@@ -80,8 +85,8 @@ Towers.prototype.autoPlay = function (numMoves) {
 };
 
 const hanoi = new Towers("Hanoi", 3, 5);
-const brooklyn = new Towers("Brooklyn", 8, 6);
-const washingtonDC = new Towers("Washington, D.C.", 6, 8);
+const brooklyn = new Towers("Brooklyn", 5, 7);
+const washingtonDC = new Towers("Washington, D.C.", 7, 9);
 
 console.log(hanoi);
 console.log(brooklyn);
