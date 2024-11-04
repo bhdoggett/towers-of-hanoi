@@ -10,7 +10,7 @@ This version of the Towers of Hanoi enables the player to initialize and name di
 
 const boardName = new Towers('Board Name', pegs, discs).
 
-This new game object will contain a few methods:
+This new game object will contain a few properties/methods:
 
 .name stores the name of the board given in the initial argument  
 .pegs stores the number of pegs given in the initial argment  
